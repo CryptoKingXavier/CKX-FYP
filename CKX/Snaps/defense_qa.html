@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project Defense — Q&A Master Reference</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1714;
+    --paper: #f7f4ef;
+    --cream: #ede9e0;
+    --rule: #c8c0b0;
+    --gold: #b8860b;
+    --gold-light: #d4a017;
+    --tier1: #1a4a2e;
+    --tier1-bg: #e8f3ec;
+    --tier1-accent: #2d7a47;
+    --tier2: #3a2c0a;
+    --tier2-bg: #f5eedc;
+    --tier2-accent: #b8860b;
+    --tier3: #4a1a1a;
+    --tier3-bg: #f5e8e8;
+    --tier3-accent: #c0392b;
+    --domain-bg: #f0ebe0;
+    --serif: 'Source Serif 4', Georgia, serif;
+    --display: 'Playfair Display', serif;
+    --mono: 'IBM Plex Mono', monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: 15px;
+    line-height: 1.75;
+    min-height: 100vh;
+  }
+
+  /* ── MASTHEAD ── */
+  .masthead {
+    border-bottom: 3px double var(--rule);
+    padding: 2.5rem 2rem 2rem;
+    text-align: center;
+    background: var(--cream);
+    position: relative;
+    overflow: hidden;
+  }
+  .masthead::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 28px,
+      var(--rule) 28px,
+      var(--rule) 29px
+    );
+    opacity: 0.18;
+    pointer-events: none;
+  }
+  .masthead-inner { position: relative; z-index: 1; }
+  .masthead-eyebrow {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.6rem;
+  }
+  .masthead h1 {
+    font-family: var(--display);
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    font-weight: 900;
+    line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+  }
+  .masthead h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+  .masthead-sub {
+    font-family: var(--serif);
+    font-size: 13.5px;
+    font-style: italic;
+    color: #6b5d4a;
+    max-width: 600px;
+    margin: 0.5rem auto 1.2rem;
+  }
+  .tier-legend {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+  }
+  .legend-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-family: var(--mono);
+    font-size: 11px;
+    padding: 0.3rem 0.9rem;
+    border-radius: 2px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border: 1.5px solid currentColor;
+  }
+  .legend-pill.t1 { color: var(--tier1-accent); background: var(--tier1-bg); }
+  .legend-pill.t2 { color: var(--tier2-accent); background: var(--tier2-bg); }
+  .legend-pill.t3 { color: var(--tier3-accent); background: var(--tier3-bg); }
+  .legend-dot { width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+
+  /* ── CONTROLS BAR ── */
+  .controls-bar {
+    background: var(--ink);
+    padding: 0.75rem 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .controls-bar label {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: #aaa;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .filter-btn {
+    font-family: var(--mono);
+    font-size: 11px;
+    padding: 0.3rem 0.9rem;
+    border-radius: 2px;
+    border: 1px solid #444;
+    background: transparent;
+    color: #ccc;
+    cursor: pointer;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    transition: all 0.15s;
+  }
+  .filter-btn:hover { border-color: #888; color: #fff; }
+  .filter-btn.active { background: var(--gold); border-color: var(--gold); color: var(--ink); }
+  .controls-bar .search-wrap {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .search-input {
+    background: #2a2520;
+    border: 1px solid #444;
+    color: #eee;
+    font-family: var(--mono);
+    font-size: 12px;
+    padding: 0.35rem 0.8rem;
+    border-radius: 2px;
+    width: 220px;
+    outline: none;
+  }
+  .search-input::placeholder { color: #666; }
+  .search-input:focus { border-color: var(--gold); }
+  .q-count {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: #666;
+    white-space: nowrap;
+  }
+
+  /* ── MAIN LAYOUT ── */
+  .main { max-width: 1200px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+  /* ── TIER SECTION ── */
+  .tier-section { margin-bottom: 3.5rem; }
+  .tier-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 0.4rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 2px solid var(--rule);
+  }
+  .tier-label {
+    font-family: var(--display);
+    font-size: 1.65rem;
+    font-weight: 900;
+  }
+  .tier-label.t1 { color: var(--tier1-accent); }
+  .tier-label.t2 { color: var(--tier2-accent); }
+  .tier-label.t3 { color: var(--tier3-accent); }
+  .tier-desc {
+    font-family: var(--serif);
+    font-size: 13px;
+    font-style: italic;
+    color: #6b5d4a;
+  }
+  .tier-meta {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: #999;
+    margin-left: auto;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  /* ── DOMAIN BLOCK ── */
+  .domain-block { margin-bottom: 2.5rem; }
+  .domain-header {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.55rem 1rem;
+    background: var(--domain-bg);
+    border-left: 4px solid var(--rule);
+    margin-bottom: 0;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.15s;
+  }
+  .domain-header:hover { background: #e6e0d4; }
+  .domain-header.t1 { border-left-color: var(--tier1-accent); }
+  .domain-header.t2 { border-left-color: var(--tier2-accent); }
+  .domain-header.t3 { border-left-color: var(--tier3-accent); }
+  .domain-letter {
+    font-family: var(--display);
+    font-size: 1.1rem;
+    font-weight: 700;
+    width: 28px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+  .domain-letter.t1 { color: var(--tier1-accent); }
+  .domain-letter.t2 { color: var(--tier2-accent); }
+  .domain-letter.t3 { color: var(--tier3-accent); }
+  .domain-title {
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    flex: 1;
+    color: var(--ink);
+  }
+  .domain-count {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: #999;
+  }
+  .domain-chevron {
+    font-size: 11px;
+    color: #999;
+    transition: transform 0.2s;
+  }
+  .domain-header.collapsed .domain-chevron { transform: rotate(-90deg); }
+
+  /* ── TABLE ── */
+  .qa-table-wrap {
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+  .qa-table-wrap.collapsed { max-height: 0 !important; }
+  .qa-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  .qa-table thead tr {
+    background: var(--ink);
+  }
+  .qa-table thead th {
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #bbb;
+    padding: 0.6rem 1rem;
+    text-align: left;
+  }
+  .qa-table thead th:first-child { width: 60px; text-align: center; }
+  .qa-table thead th:nth-child(2) { width: 38%; }
+  .qa-table thead th:nth-child(3) { width: auto; }
+  .qa-table thead th:last-child { width: 140px; }
+
+  .qa-row {
+    border-bottom: 1px solid var(--rule);
+    transition: background 0.1s;
+  }
+  .qa-row:hover { background: #f0ebe0; }
+  .qa-row.hidden { display: none; }
+  .qa-row td {
+    padding: 1rem 1rem;
+    vertical-align: top;
+  }
+  .qa-row td:first-child {
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    color: #999;
+    padding-top: 1.1rem;
+    white-space: nowrap;
+  }
+
+  .q-text {
+    font-family: var(--serif);
+    font-size: 14.5px;
+    font-weight: 600;
+    line-height: 1.55;
+    color: var(--ink);
+  }
+  .q-flag {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 1px 6px;
+    border-radius: 2px;
+    margin-top: 0.4rem;
+    vertical-align: middle;
+  }
+  .q-flag.danger { background: var(--tier3-bg); color: var(--tier3-accent); border: 1px solid var(--tier3-accent); }
+  .q-flag.key { background: var(--tier1-bg); color: var(--tier1-accent); border: 1px solid var(--tier1-accent); }
+  .q-flag.deep { background: var(--tier2-bg); color: var(--tier2-accent); border: 1px solid var(--tier2-accent); }
+
+  .a-text {
+    font-family: var(--serif);
+    font-size: 13.5px;
+    line-height: 1.75;
+    color: #2a2520;
+  }
+  .a-text strong { font-weight: 600; color: var(--ink); }
+  .a-text em { font-style: italic; color: #5a4d3a; }
+  .a-text .stat {
+    font-family: var(--mono);
+    font-size: 12px;
+    background: var(--cream);
+    padding: 0.1rem 0.4rem;
+    border-radius: 2px;
+    border: 1px solid var(--rule);
+    white-space: nowrap;
+  }
+  .a-text .warn {
+    display: block;
+    border-left: 3px solid var(--tier3-accent);
+    background: var(--tier3-bg);
+    padding: 0.5rem 0.8rem;
+    margin-top: 0.6rem;
+    font-size: 13px;
+    border-radius: 0 3px 3px 0;
+  }
+  .a-text .tip {
+    display: block;
+    border-left: 3px solid var(--tier1-accent);
+    background: var(--tier1-bg);
+    padding: 0.5rem 0.8rem;
+    margin-top: 0.6rem;
+    font-size: 13px;
+    border-radius: 0 3px 3px 0;
+  }
+
+  .src-badge {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: #999;
+    display: block;
+    margin-top: 0.5rem;
+  }
+  .src-badge span {
+    background: var(--cream);
+    border: 1px solid var(--rule);
+    padding: 1px 5px;
+    border-radius: 2px;
+    margin-right: 3px;
+  }
+
+  /* alternating rows */
+  .qa-row:nth-child(even) { background: #faf8f4; }
+  .qa-row:nth-child(even):hover { background: #f0ebe0; }
+
+  /* ── NO RESULTS ── */
+  .no-results {
+    text-align: center;
+    padding: 3rem;
+    font-family: var(--serif);
+    font-style: italic;
+    color: #999;
+    display: none;
+  }
+  .no-results.visible { display: block; }
+
+  /* ── PRINT / EXPORT ── */
+  .export-btn {
+    font-family: var(--mono);
+    font-size: 11px;
+    padding: 0.3rem 0.9rem;
+    border-radius: 2px;
+    border: 1px solid #444;
+    background: transparent;
+    color: #ccc;
+    cursor: pointer;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    transition: all 0.15s;
+  }
+  .export-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+  @media (max-width: 700px) {
+    .qa-table thead th:last-child, .qa-row td:last-child { display: none; }
+    .qa-table thead th:first-child, .qa-row td:first-child { display: none; }
+    .masthead { padding: 1.5rem 1rem 1rem; }
+    .main { padding: 1rem 0.75rem 3rem; }
+  }
+
+  @media print {
+    .controls-bar { display: none; }
+    .qa-table-wrap.collapsed { max-height: none !important; }
+    .qa-row.hidden { display: table-row !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div class="masthead-inner">
+    <div class="masthead-eyebrow">Final Year Project Defense Preparation</div>
+    <h1>Customer Churn Prediction<br><em>Defense Q&A Master Reference</em></h1>
+    <p class="masthead-sub">Machine Learning in Nigerian Telecommunications · MTN & Airtel Nigeria · 1,383 Respondents · SVM · Random Forest · XGBoost · Decision Tree</p>
+    <div class="tier-legend">
+      <span class="legend-pill t1"><span class="legend-dot"></span> Should Ask — Core &amp; Certain</span>
+      <span class="legend-pill t2"><span class="legend-dot"></span> Could Ask — Analytical &amp; Deep</span>
+      <span class="legend-pill t3"><span class="legend-dot"></span> Would Ask — Critical &amp; Probing</span>
+    </div>
+  </div>
+</div>
+
+<div class="controls-bar">
+  <label>Filter:</label>
+  <button class="filter-btn active" data-tier="all" onclick="filterTier('all',this)">All</button>
+  <button class="filter-btn t1" data-tier="1" onclick="filterTier('1',this)">Should Ask</button>
+  <button class="filter-btn t2" data-tier="2" onclick="filterTier('2',this)">Could Ask</button>
+  <button class="filter-btn t3" data-tier="3" onclick="filterTier('3',this)">Would Ask</button>
+  <span class="q-count" id="qcount">37 questions</span>
+  <div class="search-wrap">
+    <input class="search-input" type="text" placeholder="Search questions or answers..." oninput="searchQA(this.value)" id="searchBox">
+    <button class="export-btn" onclick="window.print()">Print</button>
+  </div>
+</div>
+
+<div class="main" id="mainContent">
+  <div class="no-results" id="noResults">No questions match your search.</div>
+
+  <!-- ════════════════════════════════════════
+       TIER 1 — SHOULD ASK
+  ════════════════════════════════════════ -->
+  <div class="tier-section" data-tier="1">
+    <div class="tier-header">
+      <span class="tier-label t1">Tier 1 — Should Ask</span>
+      <span class="tier-desc">Core concepts, objectives, methodology, results. Near-certain to appear.</span>
+      <span class="tier-meta">~70% of defense time</span>
+    </div>
+
+    <!-- DOMAIN A -->
+    <div class="domain-block">
+      <div class="domain-header t1" onclick="toggleDomain(this)">
+        <span class="domain-letter t1">A</span>
+        <span class="domain-title">Research Foundation &amp; Objectives</span>
+        <span class="domain-count">6 questions</span>
+        <span class="domain-chevron">▼</span>
+      </div>
+      <div class="qa-table-wrap" style="max-height:9000px">
+        <table class="qa-table">
+          <thead><tr><th>#</th><th>Question</th><th>Model Answer</th><th>Source</th></tr></thead>
+          <tbody>
+
+            <tr class="qa-row" data-tier="1" data-domain="A">
+              <td>A1</td>
+              <td><div class="q-text">What is the specific problem your research is solving, and why is it important to the Nigerian telecommunications industry today?</div><span class="q-flag key">Key</span></td>
+              <td><div class="a-text">This research addresses the challenge of <strong>predicting customer churn</strong> in Nigeria's telecommunications sector — specifically identifying subscribers of MTN Nigeria and Airtel Nigeria who are likely to discontinue their service. The problem is significant because Nigeria's telecoms market exceeded <span class="stat">200 million</span> active mobile subscriptions in 2023, making it one of Africa's largest. High churn rates directly translate to revenue loss, increased acquisition costs (5–10× more expensive than retention), and reputational damage. Survey data shows <span class="stat">43.5%</span> of sampled customers are likely or very likely to switch providers, driven primarily by cost (75%) and poor service quality (69.3%). Without a systematic, data-driven approach to identify at-risk customers early, operators lose both revenue and competitive footing in an intensely competitive market.</div>
+              <span class="src-badge"><span>Ch. 1.1</span><span>Ch. 1.2</span><span>Ch. 4.1</span></span></td>
+              <td><span class="src-badge"><span>Ch. 1</span></span></td>
+            </tr>
+
+            <tr class="qa-row" data-tier="1" data-domain="A">
+              <td>A2</td>
+              <td><div class="q-text">State your four research objectives clearly. How does each chapter of your project map to each objective?</div><span class="q-flag key">Key</span></td>
+              <td><div class="a-text">
+                <strong>Objective 1:</strong> Identify key churn factors in Nigerian telecoms → answered in <em>Chapter 4</em> through survey analysis of 1,383 respondents (Tables 4.1.1–4.1.10).<br><br>
+                <strong>Objective 2:</strong> Design a database to store customer and telecom data → described in <em>Chapter 3</em> (data collection design, preprocessing pipeline, feature schema in Table 4.2).<br><br>
+                <strong>Objective 3:</strong> Develop a machine-learning framework for churn prediction → implemented in <em>Chapter 4</em> using Decision Tree, Random Forest, XGBoost, and SVM with Python/scikit-learn.<br><br>
+                <strong>Objective 4:</strong> Evaluate and compare model performance → delivered in <em>Chapter 4</em> via Tables 4.3.1–4.3.4, confusion matrices (Figures 4.3.1–4.3.4), and Figure 4.3.5 comparative plot.
+              </div>
+              <span class="src-badge"><span>Ch. 1.3</span><span>Ch. 3</span><span>Ch. 4</span></span></td>
+              <td><span class="src-badge"><span>Ch. 1.3</span></span></td>
+            </tr>
+
+            <tr class="qa-row" data-tier="1" data-domain="A">
+              <td>A3</td>
+              <td><div class="q-text">What is the difference between voluntary and involuntary churn? Give a real Nigerian example of each.</div></td>
+              <td><div class="a-text"><strong>Voluntary churn</strong> is customer-initiated — the subscriber actively decides to leave. Example: an MTN Nigeria customer frustrated with repeated call drops and high data costs decides to port to Airtel Nigeria, drawn by a competitor's cheaper data bundle promotion.<br><br><strong>Involuntary churn</strong> is provider-initiated — the telecom company terminates the relationship. Example: 9mobile disconnecting a subscriber whose prepaid balance has been zero for 90+ days due to non-payment, or suspending accounts following regulatory non-compliance orders. Involuntary churn can also result from fraud detection, network infrastructure discontinuation, or network mergers/acquisitions.</div>
+              <span class="src-badge"><span>Ch. 2.2</span></span></td>
+              <td><span class="src-badge"><span>Ch. 2.2</span></span></td>
+            </tr>
+
+            <tr class="qa-row" data-tier="1" data-domain="A">
+              <td>A4</td>
+              <td><div class="q-text">Why did you focus only on MTN Nigeria and Airtel Nigeria, excluding Glo Mobile and 9mobile?</div></td>
+              <td><div class="a-text">MTN Nigeria and Airtel Nigeria are the <strong>two dominant operators</strong> in Nigeria's telecommunications market, collectively accounting for the majority of mobile subscriptions and revenue. They also represent the clearest churn-versus-retention dynamics in the market, with MTN's MoMo mobile money service and Airtel's expanding 4G network offering differentiated retention levers.<br><br>This focus was deliberate (Chapter 1.7) to ensure data relevance and depth. However, Chapter 1.8 acknowledges this as a limitation — findings cannot be generalized to Glo Mobile or 9mobile, which have distinct pricing structures, customer demographics, and churn drivers. Future research should encompass all four major operators.</div>
+              <span class="src-badge"><span>Ch. 1.7</span><span>Ch. 1.8</span></span></td>
+              <td><span class="src-badge"><span>Ch. 1.7</span></span></td>
+            </tr>
+
+            <tr class="qa-row" data-tier="1" data-domain="A">
+              <td>A5</td>
+              <td><div class="q-text">What are your three research questions, and how does your methodology answer each one?</div><span class="q-flag key">Key</span></td>
+              <td><div class="a-text">
+                <strong>RQ1:</strong> What are the key factors that influence customer churn in telecommunications? → Answered through descriptive survey analysis in Chapter 4 — cost (75%), poor service quality (69.3%), competitor offers (60.8%), and customer service issues (57.7%) emerged as the top four drivers.<br><br>
+                <strong>RQ2:</strong> Which machine learning models are most effective in predicting customer churn? → Answered by building and evaluating all four models; SVM achieved the highest accuracy and recall (both 65%).<br><br>
+                <strong>RQ3:</strong> How do different machine learning models compare in terms of accuracy and performance? → Answered by the comparative performance plot (Figure 4.3.5) and Tables 4.3.1–4.3.4, showing SVM > RF > XGBoost > DT on accuracy.
+              </div>
+              <span class="src-badge"><span>Ch. 1.4</span><span>Ch. 4.3</span></span></td>
+              <td><span class="src-badge"><span>Ch. 1.4</span></span></td>
+            </tr>
+
+            <tr class="qa-row" data-tier="1" data-domain="A">
+              <td>A6</td>
+              <td><div class="q-text">What is the significance of this study — to industry, and to academia?</div></td>
+              <td><div class="a-text"><strong>Industrial significance:</strong> Telecom companies can integrate the predictive models into CRM systems to identify at-risk subscribers early, then deploy targeted retention strategies (personalized offers, loyalty rewards, proactive support). This directly reduces churn rates, lowers acquisition costs, and stabilizes revenues.<br><br><strong>Academic significance:</strong> The study contributes to a sparse body of literature on ML-based churn prediction in the <em>Nigerian</em> telecom context specifically. It demonstrates the comparative performance of four ML models under Nigerian market conditions, fills identified gaps (see Table 2.14), and provides a replicable methodology for future researchers in developing-market telecoms.</div>
+              <span class="src-badge"><span>Ch. 1.6</span><span>Ch. 5.3</span></span></td>
+              <td><span class="src-badge"><span>Ch. 1.6</span></span></td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- DOMAIN B -->
+    <div class="domain-block">
+      <div class="domain-header t1" onclick="toggleDomain(this)">
+        <span class="domain-letter t1">B</span>
+        <span class="domain-title">Data Collection &amp; Preprocessing</span>
+        <span class="domain-count">7 questions</span>
+        <span class="domain-chevron">▼</span>
+      </div>
+      <div class="qa-table-wrap" style="max-height:9000px">
+        <table class="qa-table">
+          <thead><tr><th>#</th><th>Question</th><th>Model Answer</th><th>Source</th></tr></thead>
+          <tbody>
+
+            <tr class="qa-row" data-tier="1" data-domain="B">
+              <td>B1</td>
+              <td><div class="q-text">Walk the panel through your data collection process from beginning to end.</div><span class="q-flag key">Key</span></td>
+              <td><div class="a-text">Data was collected through two channels: (1) <strong>Primary data</strong> via structured Google Forms questionnaires distributed electronically to MTN and Airtel subscribers, yielding <span class="stat">2,576</span> raw responses; and (2) a <strong>supplemental public dataset</strong> from the UCI Machine Learning Repository to strengthen model generalizability. After data cleaning — removing records with missing values, duplicate entries, and inconsistent responses — the final working dataset was refined to <span class="stat">1,383</span> records. These records were then encoded, normalized, and split 80:20 into training (<span class="stat">~1,106</span>) and test (<span class="stat">~277</span>) sets before model training.</div>
+              <span class="src-badge"><span>Ch. 3.3</span><span>Ch. 4.1</span></span></td>
+              <td><span class="src-badge"><span>Ch. 3.3</span></span></td>
+            </tr>
+
+            <tr class="qa-row" data-tier="1" data-domain="B">
+              <td>B2</td>
+              <td><div class="q-text">Why did you start with 2,576 respondents but end up with only 1,383? What happened to the rest?</div></td>
+              <td><div class="a-text">The reduction from <span class="stat">2,576</span> to <span class="stat">1,383</span> — a removal of approximately <span class="stat">1,193 records (46.3%)</span> — occurred during the data cleaning phase described in Chapter 4.1. The excluded entries had one or more of the following issues: <strong>missing values</strong> in critical fields (e.g., blank responses to churn intention or spending), <strong>inconsistent responses</strong> (contradictory answers across related questions), and entries that fell outside the defined study population (non-subscribers or respondents who did not engage with MTN or Airtel). Rather than imputing these records, the decision was made to remove them to preserve data integrity and avoid introducing bias through imputation assumptions.</div>
+              <span class="src-badge"><span>Ch. 4.1</span></span></td>
+              <td><span class="src-badge"><span>Ch. 4.1</span></span></td>
+            </tr>
+
+            <tr class="qa-row" data-tier="1" data-domain="B">
+              <td>B3</td>
+              <td><div class="q-text">What is purposive sampling and why did you use it over random sampling?</div></td>
+              <td><div class="a-text"><strong>Purposive sampling</strong> is a non-probability sampling technique where respondents are deliberately selected based on specific characteristics relevant to the research objectives. In this study (Chapter 3.8), it meant targeting customers who had actively interacted with telecom services over a defined period — particularly those exhibiting churn-related behaviors such as frequent service complaints, plan changes, or expressed switching intentions.<br><br>This was preferred over random sampling because random selection could yield many respondents with insufficient exposure to the variables under study (e.g., customers who rarely use their SIM or have never filed a complaint), which would dilute the signal in churn-related features. Purposive sampling ensures a more informative and analytically relevant sample for churn prediction modeling.</div>
+              <span class="src-badge"><span>Ch. 3.8</span></span></td>
+              <td><span class="src-badge"><span>Ch. 3.8</span></span></td>
+            </tr>
+
+            <tr class="qa-row" data-tier="1" data-domain="B">
+              <td>B4</td>
+              <td><div class="q-text">List all 13 features in your dataset and state their data types.</div><span class="q-flag key">Key</span></td>
+              <td><div class="a-text">From Table 4.2: <strong>Age</strong> (int64), <strong>Gender</strong> (object), <strong>Subscription Type</strong> (object — Prepaid/Postpaid), <strong>Occupation</strong> (object — Student/Employed/Self-employed/Unemployed/Retired/Other), <strong>Educational Level</strong> (object — High School/Undergraduate/Postgraduate/Other), <strong>Monthly Spending in NGN</strong> (int64), <strong>Contract Length in months</strong> (int64), <strong>Monthly Call Usage in minutes</strong> (int64), <strong>Monthly Data Usage in GB</strong> (float64), <strong>Primary Communication Method</strong> (object — Voice/Text/Data/Other), <strong>Customer Complaints</strong> (object), <strong>Telecom Provider</strong> (object — MTN/Airtel), and <strong>Churn</strong> (object — Yes/No, the target variable). The dataset has 1 float64 column, 4 int64 columns, and 8 object columns, with a memory footprint of approximately 702.4 KB.</div>
+              <span class="src-badge"><span>Ch. 4.2 Table 4.2</span></span></td>
+              <td><span class="src-badge"><span>Table 4.2</span></span></td>
+            </tr>
+
+            <tr class="qa-row" data-tier="1" data-domain="B">
+              <td>B5</td>
+              <td><div class="q-text">What is min-max normalization, and which features required it? State the formula.</div></td>
+              <td><div class="a-text">Min-max normalization (Chapter 3.4) rescales numerical features to a fixed range of <span class="stat">[0, 1]</span> using the formula:<br><br><em>x' = (x − x_min) / (x_max − x_min)</em><br><br>where <em>x</em> is the original value, <em>x_min</em> is the column minimum, <em>x_max</em> is the column maximum, and <em>x'</em> is the normalized value. The numerical features requiring scaling were: <strong>Age</strong>, <strong>Monthly Spending (NGN)</strong>, <strong>Contract Length (months)</strong>, <strong>Monthly Call Usage (minutes)</strong>, and <strong>Monthly Data Usage (GB)</strong>. Normalization was necessary because these features operate on vastly different scales — e.g., Age ranges from ~18 to 65+, while Monthly Spending can range from ₦1,000 to ₦20,001+. Without normalization, features with larger ranges would dominate distance-based algorithms like SVM.</div>
+              <span class="src-badge"><span>Ch. 3.4</span></span></td>
+              <td><span class="src-badge"><span>Ch. 3.4</span></span></td>
+            </tr>
+
+            <tr class="qa-row" data-tier="1" data-domain="B">
+              <td>B6</td>
+              <td><div class="q-text">How did you handle missing values in your dataset?</div></td>
+              <td><div class="a-text">Missing values were handled through <strong>listwise deletion</strong> — rows containing missing or incomplete responses were removed entirely from the dataset. This is reflected in the reduction from 2,576 raw records to 1,383 clean records (Chapter 4.1). While this approach is the most conservative (preserving data quality), it comes at the cost of losing a significant portion of the dataset (~46%). Alternative approaches such as mean/median imputation, mode imputation for categorical variables, or KNN-based imputation were not applied in this study. This is a limitation acknowledged in the scope — future work could explore imputation strategies to retain more records and potentially improve model performance.</div>
+              <span class="src-badge"><span>Ch. 4.1</span></span></td>
+              <td><span class="src-badge"><span>Ch. 4.1</span></span></td>
+            </tr>
+
+            <tr class="qa-row" data-tier="1" data-domain="B">
+              <td>B7</td>
+              <td><div class="q-text">What ethical considerations did you observe in this research?</div></td>
+              <td><div class="a-text">Three key ethical safeguards were observed (Chapter 3.3): (1) <strong>Informed consent</strong> — all primary survey respondents consented to participation before completing the questionnaire; (2) <strong>Data anonymization</strong> — all customer-identifying information was removed or masked during preprocessing to protect individual privacy; and (3) <strong>Regulatory compliance</strong> — the study adhered to both the <em>General Data Protection Regulation (GDPR)</em> and the <em>Nigeria Data Protection Regulation (NDPR)</em>, which govern the lawful collection, processing, and storage of personal data. These measures ensured that no individual respondent could be identified from the published dataset or findings.</div>
+              <span class="src-badge"><span>Ch. 3.3</span></span></td>
+              <td><span class="src-badge"><span>Ch. 3.3</span></span></td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- DOMAIN C -->
+    <div class="domain-block">
+      <div class="domain-header t1" onclick="toggleDomain(this)">
+        <span class="domain-letter t1">C</span>
+        <span class="domain-title">Feature Selection &amp; Engineering</span>
+        <span class="domain-count">4 questions</span>
+        <span class="domain-chevron">▼</span>
+      </div>
+      <div class="qa-table-wrap" style="max-height:9000px">
+        <table class="qa-table">
+          <thead><tr><th>#</th><th>Question</th><th>Model Answer</th><th>Source</th></tr></thead>
+          <tbody>
+
+            <tr class="qa-row" data-tier="1" data-domain="C">
+              <td>C1</td>
+              <td><div class="q-text">How did you select the 13 features used in your model?</div><span class="q-flag key">Key</span></td>
+              <td><div class="a-text">Feature selection employed three complementary techniques (Chapter 3.5):<br><br><strong>1. Correlation Analysis:</strong> A correlation matrix was computed for all numerical features to identify relationships with the target variable (Churn). Features showing meaningful correlation with churn were prioritized; redundant or weakly correlated features were candidates for exclusion.<br><br><strong>2. Chi-Square Test:</strong> Applied to categorical features to test statistical independence between each predictor and the churn outcome. Features with a p-value below <span class="stat">0.05</span> were retained as having a significant association with churn.<br><br><strong>3. Domain Knowledge:</strong> Industry expertise about Nigerian telecom dynamics was used to confirm the relevance of features like subscription type, monthly spending, and complaint frequency — even when statistical tests showed moderate significance.</div>
+              <span class="src-badge"><span>Ch. 3.5</span></span></td>
+              <td><span class="src-badge"><span>Ch. 3.5</span></span></td>
+            </tr>
+
+            <tr class="qa-row" data-tier="1" data-domain="C">
+              <td>C2</td>
+              <td><div class="q-text">What did your correlation heatmap reveal, and what are its implications for your model?</div></td>
+              <td><div class="a-text">The correlation heatmap (Figure 4.2.13) revealed <strong>near-zero correlations</strong> among all five numerical features: Age, Monthly Spending, Contract Length, Monthly Call Usage, and Monthly Data Usage. This means no strong linear relationship exists between any pair of these features or between them and the target variable individually.<br><br>The key implication is that <em>churn prediction in this dataset is unlikely to be driven by simple linear numeric relationships</em> — rather, the signal resides in categorical features (subscription type, complaint history, communication method) and non-linear interactions. This finding actually strengthens the justification for using ensemble and non-linear ML models (Random Forest, XGBoost, SVM with RBF kernel) over traditional linear methods like logistic regression.</div>
+              <span class="src-badge"><span>Ch. 4.2 Fig 4.2.13</span></span></td>
+              <td><span class="src-badge"><span>Fig. 4.2.13</span></span></td>
+            </tr>
+
+            <tr class="qa-row" data-tier="1" data-domain="C">
+              <td>C3</td>
+              <td><div class="q-text">What is the chi-square test and how was it applied in feature selection?</div></td>
+              <td><div class="a-text">The chi-square test is a statistical test that measures whether two categorical variables are <strong>independent</strong> or whether there is a significant association between them. In this study, it was applied to test whether each categorical predictor (Gender, Subscription Type, Occupation, Educational Level, Primary Communication Method, Customer Complaints) was statistically independent of the target variable (Churn = Yes/No).<br><br>Features with a <strong>p-value &lt; 0.05</strong> were deemed to have a statistically significant association with churn and were retained. Features failing this threshold were treated as candidates for exclusion, as their inclusion would add noise without predictive value. For example, Subscription Type (Prepaid vs. Postpaid) showed a significant association with churn, which is also visually confirmed in Figure 4.2.15 — prepaid customers churn at a higher rate than postpaid customers.</div>
+              <span class="src-badge"><span>Ch. 3.5</span><span>Fig. 4.2.15</span></span></td>
+              <td><span class="src-badge"><span>Ch. 3.5</span></span></td>
+            </tr>
+
+            <tr class="qa-row" data-tier="1" data-domain="C">
+              <td>C4</td>
+              <td><div class="q-text">What trend did you observe about subscription type and churn tendency?</div></td>
+              <td><div class="a-text">Figure 4.2.15 and Table 4.1.2 show a clear pattern: <strong>prepaid customers churn at a higher rate</strong> than postpaid customers. This is consistent with the broader market structure — <span class="stat">79.5%</span> of respondents are prepaid subscribers, and prepaid plans carry no contractual lock-in or early termination fees, making it trivially easy to switch providers or simply stop topping up. Postpaid customers, by contrast, tend to be higher-income users or corporate clients with greater switching friction (contract penalties, device financing). The Switching Costs Theory from Chapter 2.13 directly supports this finding: lower switching costs among prepaid users translate to higher churn propensity.</div>
+              <span class="src-badge"><span>Fig. 4.2.15</span><span>Ch. 2.13</span></span></td>
+              <td><span class="src-badge"><span>Fig. 4.2.15</span></span></td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- DOMAIN D -->
+    <div class="domain-block">
+      <div class="domain-header t1" onclick="toggleDomain(this)">
+        <span class="domain-letter t1">D</span>
+        <span class="domain-title">Machine Learning Models</span>
+        <span class="domain-count">7 questions</span>
+        <span class="domain-chevron">▼</span>
+      </div>
+      <div class="qa-table-wrap" style="max-height:9000px">
+        <table class="qa-table">
+          <thead><tr><th>#</th><th>Question</th><th>Model Answer</th><th>Source</th></tr></thead>
+          <tbody>
+
+            <tr class="qa-row" data-tier="1" data-domain="D">
+              <td>D1</td>
+              <td><div class="q-text">Why did you choose Decision Tree, Random Forest, SVM, and XGBoost? Why not logistic regression or neural networks?</div><span class="q-flag key">Key</span></td>
+              <td><div class="a-text">The four models were selected (Chapter 3.6) for their <strong>simplicity, effectiveness, and interpretability</strong> in classification tasks like churn prediction. Each brings a complementary strength: DT offers visual explainability, RF provides ensemble-level accuracy with reduced overfitting, SVM handles high-dimensional non-linear boundaries via kernel functions, and XGBoost delivers state-of-the-art gradient boosting performance.<br><br><strong>Logistic regression</strong> was intentionally excluded because Chapter 2.5 identifies its core limitations — it assumes linearity between predictors and log-odds, is sensitive to multicollinearity, and cannot capture complex non-linear patterns. Since the heatmap confirmed non-linear dynamics in this dataset, logistic regression would likely underperform.<br><br><strong>Neural networks</strong> were excluded because they require substantially larger datasets and significant computational resources to generalize effectively (Chapter 2.6.1). With only 1,383 records, a deep learning model would risk overfitting without yielding meaningful accuracy gains.</div>
+              <span class="src-badge"><span>Ch. 3.6</span><span>Ch. 2.5</span><span>Ch. 2.6.1</span></span></td>
+              <td><span class="src-badge"><span>Ch. 3.6</span></span></td>
+            </tr>
+
+            <tr class="qa-row" data-tier="1" data-domain="D">
+              <td>D2</td>
+              <td><div class="q-text">Explain how a Decision Tree works and how it makes a churn prediction.</div></td>
+              <td><div class="a-text">A Decision Tree (Chapter 2.7) is a supervised learning algorithm that recursively partitions the feature space by asking a sequence of yes/no questions about feature values. Starting at the <strong>root node</strong>, the algorithm selects the feature that best separates churners from non-churners (based on criteria such as Gini impurity or information gain). Each split creates two or more branches representing different value ranges or categories. This continues down the tree until reaching <strong>leaf nodes</strong>, which output the final prediction (Churn = Yes or No).<br><br>For example, a path might read: "Is Monthly Spending &lt; ₦5,000?" → Yes → "Are there &gt;3 complaints?" → Yes → <em>Predict Churn = Yes</em>. The tree is trained on the 80% training set and the learned rules are applied to the test set. Its main advantage is interpretability — you can trace exactly why a customer was flagged as a churner.</div>
+              <span class="src-badge"><span>Ch. 2.7</span></span></td>
+              <td><span class="src-badge"><span>Ch. 2.7</span></span></td>
+            </tr>
+
+            <tr class="qa-row" data-tier="1" data-domain="D">
+              <td>D3</td>
+              <td><div class="q-text">What is the difference between a Decision Tree and a Random Forest?</div></td>
+              <td><div class="a-text">A <strong>Decision Tree</strong> is a single model that grows one tree from the training data. While interpretable, it tends to overfit — memorizing training patterns that do not generalize to new data — especially when the tree is allowed to grow deep.<br><br>A <strong>Random Forest</strong> is an ensemble method that builds many decision trees (typically hundreds), each trained on a random subset of the training data (<em>bagging</em>) and a random subset of features. Final predictions are made by <strong>majority vote</strong> across all trees. This diversity reduces variance and overfitting significantly. In this study, RF achieved <span class="stat">64%</span> accuracy versus DT's <span class="stat">54%</span>, directly demonstrating the benefit of the ensemble approach. As Breiman (2001) argues, combining multiple weak learners creates a strong, generalized predictor.</div>
+              <span class="src-badge"><span>Ch. 2.6.1</span><span>Ch. 2.7</span></span></td>
+              <td><span class="src-badge"><span>Ch. 2.7</span></span></td>
+            </tr>
+
+            <tr class="qa-row" data-tier="1" data-domain="D">
+              <td>D4</td>
+              <td><div class="q-text">What is XGBoost and how does it differ from Random Forest?</div></td>
+              <td><div class="a-text">XGBoost (Extreme Gradient Boosting) is an ensemble method that builds trees <strong>sequentially</strong> — each new tree is trained to correct the prediction errors of the previous one. This is called <em>boosting</em>, and it uses gradient descent to minimize a loss function at each step. XGBoost also incorporates <strong>regularization</strong> (L1 and L2 penalties) to prevent overfitting, which makes it more robust than standard gradient boosting.<br><br>The key distinction from Random Forest is the training paradigm: RF uses <em>bagging</em> (parallel, independent trees, then aggregate), while XGBoost uses <em>boosting</em> (sequential, error-correcting trees). In practice, XGBoost often achieves higher accuracy on structured tabular data — it won many Kaggle competitions. In this study it achieved <span class="stat">61%</span> accuracy with the highest precision of the four models (<span class="stat">57%</span>), indicating it was more selective (fewer false positives) but less sensitive than RF and SVM.</div>
+              <span class="src-badge"><span>Ch. 2.6.1</span></span></td>
+              <td><span class="src-badge"><span>Ch. 2.6.1</span></span></td>
+            </tr>
+
+            <tr class="qa-row" data-tier="1" data-domain="D">
+              <td>D5</td>
+              <td><div class="q-text">How does a Support Vector Machine (SVM) classify customers as churn or no-churn?</div></td>
+              <td><div class="a-text">SVM (Chapter 2.6.1) is a supervised learning algorithm that finds the <strong>optimal hyperplane</strong> — the decision boundary that maximally separates the two classes (Churn = Yes vs. No) in multi-dimensional feature space. The boundary is positioned to maximize the <em>margin</em>, which is the distance between the hyperplane and the nearest data points from each class (called <em>support vectors</em>).<br><br>For non-linearly separable data (which is typical in real-world churn datasets), SVM uses <strong>kernel functions</strong> (e.g., Radial Basis Function — RBF) to transform the feature space into a higher dimension where a linear separator can be found. SVM is particularly suited to high-dimensional spaces and datasets where the number of features is large relative to records. It achieved the highest accuracy (<span class="stat">65%</span>) in this study.</div>
+              <span class="src-badge"><span>Ch. 2.6.1</span><span>Ch. 4.3</span></span></td>
+              <td><span class="src-badge"><span>Ch. 2.6.1</span></span></td>
+            </tr>
+
+            <tr class="qa-row" data-tier="1" data-domain="D">
+              <td>D6</td>
+              <td><div class="q-text">What was your train-test split ratio and why did you choose 80:20?</div></td>
+              <td><div class="a-text">The dataset was split <strong>80% training</strong> (~1,106 records) and <strong>20% testing</strong> (~277 records) as described in Chapters 3.3 and 4.2. The 80:20 split is a widely accepted standard in machine learning practice because it provides: (1) sufficient training data for models to learn underlying patterns; and (2) a reasonably sized holdout set for unbiased performance evaluation.<br><br>For the dataset size in this study (1,383 records), a larger test proportion (e.g., 30%) would have left too few training records for the ensemble models to build diverse trees. A smaller test proportion (e.g., 10%) would make the evaluation less reliable due to the small test set size. The 80:20 split represents the optimal balance for this scale of data, consistent with best practices in scikit-learn documentation and the broader ML literature.</div>
+              <span class="src-badge"><span>Ch. 3.3</span><span>Ch. 4.2</span></span></td>
+              <td><span class="src-badge"><span>Ch. 3.3</span></span></td>
+            </tr>
+
+            <tr class="qa-row" data-tier="1" data-domain="D">
+              <td>D7</td>
+              <td><div class="q-text">What tools and libraries did you use to implement your models?</div></td>
+              <td><div class="a-text">The implementation stack (Chapters 1.5, 3.6) was entirely Python-based:<br><br><strong>scikit-learn</strong> — core ML library providing implementations of Decision Tree, Random Forest, SVM, and evaluation metrics (accuracy, precision, recall, F1-score, confusion matrix).<br><strong>XGBoost library</strong> — dedicated XGBoost implementation with gradient boosting and regularization.<br><strong>pandas</strong> — data loading, cleaning, transformation, and feature engineering.<br><strong>NumPy</strong> — numerical computations and array operations.<br><strong>Matplotlib</strong> (and implicitly Seaborn) — data visualization, including the correlation heatmap (Fig. 4.2.13), distribution plots (Figs. 4.2.1–4.2.12), confusion matrices, and comparative performance bar chart (Fig. 4.3.5).<br><strong>Google Forms</strong> — survey instrument for primary data collection.</div>
+              <span class="src-badge"><span>Ch. 1.5</span><span>Ch. 3.6</span></span></td>
+              <td><span class="src-badge"><span>Ch. 1.5</span></span></td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- DOMAIN E -->
+    <div class="domain-block">
+      <div class="domain-header t1" onclick="toggleDomain(this)">
+        <span class="domain-letter t1">E</span>
+        <span class="domain-title">Model Evaluation &amp; Results</span>
+        <span class="domain-count">5 questions</span>
+        <span class="domain-chevron">▼</span>
+      </div>
+      <div class="qa-table-wrap" style="max-height:9000px">
+        <table class="qa-table">
+          <thead><tr><th>#</th><th>Question</th><th>Model Answer</th><th>Source</th></tr></thead>
+          <tbody>
+
+            <tr class="qa-row" data-tier="1" data-domain="E">
+              <td>E1</td>
+              <td><div class="q-text">Define accuracy, precision, recall, and F1-score. Provide the formula for each.</div><span class="q-flag key">Key</span></td>
+              <td><div class="a-text">From Chapter 3.7 and 2.10:<br><br><strong>Accuracy</strong> = (TP + TN) / (TP + TN + FP + FN) — The proportion of all predictions that were correct. Useful overall but misleading on imbalanced datasets.<br><br><strong>Precision</strong> = TP / (TP + FP) — Of all customers predicted to churn, how many actually churned? High precision means fewer false alarms.<br><br><strong>Recall (Sensitivity)</strong> = TP / (TP + FN) — Of all customers who actually churned, how many did the model catch? High recall means fewer missed churners. This is the most critical metric for churn prevention.<br><br><strong>F1-Score</strong> = 2 × (Precision × Recall) / (Precision + Recall) — The harmonic mean of precision and recall. Provides a single balanced metric, especially valuable when classes are imbalanced.</div>
+              <span class="src-badge"><span>Ch. 3.7</span><span>Ch. 2.10</span></span></td>
+              <td><span class="src-badge"><span>Ch. 3.7</span></span></td>
+            </tr>
+
+            <tr class="qa-row" data-tier="1" data-domain="E">
+              <td>E2</td>
+              <td><div class="q-text">Walk through your results. Which model performed best and by what metrics?</div><span class="q-flag key">Key</span></td>
+              <td><div class="a-text">Results from Chapter 4.3 (Tables 4.3.1–4.3.4):<br><br><strong>SVM:</strong> Accuracy 65%, Recall 65%, Precision 43%, F1 52% — highest on accuracy and recall.<br><strong>Random Forest:</strong> Accuracy 64%, Recall 64%, Precision 55%, F1 54% — close second, more balanced.<br><strong>XGBoost:</strong> Accuracy 61%, Recall 61%, Precision 57%, F1 58% — highest precision, most balanced overall.<br><strong>Decision Tree:</strong> Accuracy 54%, Recall 54%, Precision 55%, F1 55% — weakest performance.<br><br>SVM was declared the best model based on accuracy and recall. However, a critical reading of Table 4.3.4 reveals that for Class 1 (churners specifically), SVM achieved 0% precision, 0% recall, and 0% F1 — meaning it predicted almost no churners at all. XGBoost arguably offers the most genuinely useful churn-prediction performance given its more balanced metrics across both classes.</div>
+              <span class="src-badge"><span>Ch. 4.3</span><span>Tables 4.3.1–4.3.4</span></span></td>
+              <td><span class="src-badge"><span>Ch. 4.3</span></span></td>
+            </tr>
+
+            <tr class="qa-row" data-tier="1" data-domain="E">
+              <td>E3</td>
+              <td><div class="q-text">What is a confusion matrix? Explain TP, TN, FP, FN in the context of churn prediction.</div></td>
+              <td><div class="a-text">A confusion matrix is a 2×2 table that summarizes a classification model's predictions against actual outcomes (Figures 4.3.1–4.3.4). In churn prediction context:<br><br><strong>True Positive (TP):</strong> Model predicted "will churn" and customer actually churned. Best outcome — enables proactive retention intervention.<br><br><strong>True Negative (TN):</strong> Model predicted "will not churn" and customer stayed. Correct and efficient — no wasted retention spend.<br><br><strong>False Positive (FP):</strong> Model predicted "will churn" but customer was not going to churn. A false alarm — wastes retention resources (e.g., offering discounts to loyal customers unnecessarily).<br><br><strong>False Negative (FN):</strong> Model predicted "will not churn" but customer churned anyway. The <em>most damaging</em> error — a churner slips through undetected, representing lost revenue with no intervention attempt.</div>
+              <span class="src-badge"><span>Ch. 3.7</span><span>Fig. 4.3.1–4.3.4</span></span></td>
+              <td><span class="src-badge"><span>Ch. 3.7</span></span></td>
+            </tr>
+
+            <tr class="qa-row" data-tier="1" data-domain="E">
+              <td>E4</td>
+              <td><div class="q-text">Why is recall especially important in churn prediction?</div></td>
+              <td><div class="a-text">In churn prediction, a <strong>False Negative</strong> (missing an actual churner) is far more costly than a <strong>False Positive</strong> (incorrectly flagging a loyal customer). When a churner is missed, the company loses that customer's entire future revenue with no opportunity to intervene. By contrast, offering an unnecessary retention incentive to a non-churner (false positive) typically costs the company far less — perhaps a discounted bundle or a loyalty reward.<br><br>This asymmetry of error costs means <strong>maximizing recall</strong> (catching as many true churners as possible) is the primary optimization goal for a real-world churn prediction system. SVM achieved the highest recall in this study at <span class="stat">65%</span>, though this is caveated by its failure to correctly classify any individual churner in the churn class specifically (due to class imbalance effects on its decision boundary).</div>
+              <span class="src-badge"><span>Ch. 2.10</span><span>Ch. 4.3</span></span></td>
+              <td><span class="src-badge"><span>Ch. 2.10</span></span></td>
+            </tr>
+
+            <tr class="qa-row" data-tier="1" data-domain="E">
+              <td>E5</td>
+              <td><div class="q-text">Which model would you recommend for deployment by a Nigerian telecom company, and why?</div></td>
+              <td><div class="a-text">Based purely on reported metrics, <strong>SVM</strong> is recommended in Chapter 5, citing highest accuracy (65%) and recall (65%). However, a more nuanced recommendation would be <strong>XGBoost</strong> for the following reasons:<br><br>1. XGBoost achieved the most <em>balanced</em> performance across all metrics (Acc: 61%, Prec: 57%, Recall: 61%, F1: 58%) — it actually identified some churners in Class 1, unlike SVM.<br>2. SVM's precision of 43% means more than half of customers it flags are false alarms, potentially wasting retention budget.<br>3. XGBoost's gradient boosting with regularization makes it more robust on small, imbalanced datasets.<br>4. Random Forest (64% accuracy, 55% precision) is also a strong candidate given its interpretability through feature importance scores, which telecom operators can use to understand <em>why</em> customers are flagged.<br><br>For production deployment, I would recommend XGBoost with SMOTE rebalancing as the optimal system.</div>
+              <span class="src-badge"><span>Ch. 4.3</span><span>Ch. 5.4</span></span></td>
+              <td><span class="src-badge"><span>Ch. 5</span></span></td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div><!-- end tier 1 -->
+
+
+  <!-- ════════════════════════════════════════
+       TIER 2 — COULD ASK
+  ════════════════════════════════════════ -->
+  <div class="tier-section" data-tier="2">
+    <div class="tier-header">
+      <span class="tier-label t2">Tier 2 — Could Ask</span>
+      <span class="tier-desc">Deeper analysis, trade-offs, statistical rigor, literature gaps. Panel-dependent.</span>
+      <span class="tier-meta">~20% of defense time</span>
+    </div>
+
+    <!-- DOMAIN F -->
+    <div class="domain-block">
+      <div class="domain-header t2" onclick="toggleDomain(this)">
+        <span class="domain-letter t2">F</span>
+        <span class="domain-title">Statistical Rigor &amp; Methodological Depth</span>
+        <span class="domain-count">8 questions</span>
+        <span class="domain-chevron">▼</span>
+      </div>
+      <div class="qa-table-wrap" style="max-height:9000px">
+        <table class="qa-table">
+          <thead><tr><th>#</th><th>Question</th><th>Model Answer</th><th>Source</th></tr></thead>
+          <tbody>
+
+            <tr class="qa-row" data-tier="2" data-domain="F">
+              <td>F1</td>
+              <td><div class="q-text">SVM achieved 65% accuracy but only 43% precision. How do you reconcile these two results?</div><span class="q-flag deep">Deep</span></td>
+              <td><div class="a-text">This apparent contradiction is explained by <strong>class imbalance</strong>. The test set contains approximately <span class="stat">903 non-churners</span> vs. <span class="stat">480 churners</span> — roughly 65% vs. 35%. Table 4.3.4 reveals that SVM achieved near-perfect recall on Class 0 (non-churn: 1.00) but zero recall on Class 1 (churn: 0.00). This means the model predicted "no churn" for virtually every single test record.<br><br>Since 65% of the test set are genuinely non-churners, predicting "no churn" for everyone yields 65% accuracy automatically — with no actual churn prediction happening. The low precision (43%) then reflects the few churn predictions that were made (mostly false positives). In practice, this SVM model provides <em>no utility</em> for churn identification and should be retrained with class balancing techniques before any deployment consideration.<span class="warn">Critical insight: the accuracy metric alone is deeply misleading here. This is the class imbalance problem in action.</span></div>
+              <span class="src-badge"><span>Table 4.3.4</span><span>Ch. 2.11</span></span></td>
+              <td><span class="src-badge"><span>Table 4.3.4</span></span></td>
+            </tr>
+
+            <tr class="qa-row" data-tier="2" data-domain="F">
+              <td>F2</td>
+              <td><div class="q-text">Did you apply any technique to address class imbalance? If not, what would you have done?</div></td>
+              <td><div class="a-text">No class imbalance mitigation technique was explicitly applied in this study. The class distribution in the test set (903 non-churners vs. 480 churners) was used as-is.<br><br>Had this been addressed, the recommended approaches would include:<br><br><strong>SMOTE (Synthetic Minority Oversampling Technique):</strong> Generates synthetic samples of the minority class (churners) by interpolating between existing minority samples — increasing their representation without simple duplication.<br><br><strong>Class-weight balancing:</strong> Setting <span class="stat">class_weight='balanced'</span> in scikit-learn's SVM and RF implementations, which automatically adjusts loss function penalties to give the minority class proportionally higher weight during training.<br><br><strong>Undersampling:</strong> Randomly reducing the majority class (non-churners) to match the minority class size — simpler but risks losing information.<br><br>These are flagged as priority improvements for future work (Chapter 5.3).</div>
+              <span class="src-badge"><span>Ch. 2.11</span><span>Ch. 5.3</span></span></td>
+              <td><span class="src-badge"><span>Ch. 2.11</span></span></td>
+            </tr>
+
+            <tr class="qa-row" data-tier="2" data-domain="F">
+              <td>F3</td>
+              <td><div class="q-text">You defined ROC-AUC in Chapter 2 but never reported it in Chapter 4. Why?</div></td>
+              <td><div class="a-text">Chapter 2.10 provides a thorough definition of ROC-AUC, but it does not appear in the Chapter 4 evaluation tables — this is an acknowledged gap in the study's evaluation completeness.<br><br>ROC-AUC (Receiver Operating Characteristic — Area Under Curve) is particularly valuable for <strong>imbalanced classification problems</strong> precisely because it evaluates model performance at all possible decision thresholds, not just the default 0.5. It provides a single score from 0 to 1 (0.5 = random guessing, 1.0 = perfect discrimination) that is independent of class distribution — making it far more reliable than accuracy for this dataset.<br><br>Had ROC-AUC been computed, it would very likely show SVM performing close to <span class="stat">0.5</span> (random-level discrimination between churn classes), while XGBoost and RF would score higher. This would fundamentally change the model ranking and recommendation. Future work should include ROC-AUC as a primary evaluation metric.</div>
+              <span class="src-badge"><span>Ch. 2.10</span><span>Ch. 4.3</span></span></td>
+              <td><span class="src-badge"><span>Ch. 2.10</span></span></td>
+            </tr>
+
+            <tr class="qa-row" data-tier="2" data-domain="F">
+              <td>F4</td>
+              <td><div class="q-text">Chapter 3 mentions k-fold cross-validation. Was it actually applied in Chapter 4?</div></td>
+              <td><div class="a-text">Chapter 3.7 describes k-fold cross-validation as part of the methodology — noting it would be employed to ensure model generalizability. However, Chapter 4's reported results (Tables 4.3.1–4.3.4) reflect a single <strong>holdout evaluation</strong> (one 80:20 split) rather than k-fold averaged results.<br><br>This represents a gap between the proposed methodology and its implementation. A proper k-fold CV (e.g., k=5 or k=10) would have: (1) provided more statistically robust performance estimates by averaging across multiple train-test partitions; (2) reduced the risk of the reported metrics being an artifact of a particularly favorable or unfavorable data split; and (3) yielded confidence intervals for each metric. The single holdout approach is simpler but less reliable — especially with a dataset of this size. This should be acknowledged as a limitation and addressed in future work.</div>
+              <span class="src-badge"><span>Ch. 3.7</span><span>Ch. 4.3</span></span></td>
+              <td><span class="src-badge"><span>Ch. 3.7</span></span></td>
+            </tr>
+
+            <tr class="qa-row" data-tier="2" data-domain="F">
+              <td>F5</td>
+              <td><div class="q-text">What is overfitting, and how did you guard against it in your models?</div></td>
+              <td><div class="a-text"><strong>Overfitting</strong> occurs when a model learns the training data too precisely — including noise and idiosyncrasies — and consequently performs poorly on new, unseen data. It manifests as a large gap between training accuracy and test accuracy.<br><br>Safeguards employed in this study include:<br><br><strong>Random Forest:</strong> Bagging naturally reduces overfitting by introducing randomness in tree construction and averaging over diverse learners.<br><strong>XGBoost:</strong> Includes built-in L1/L2 regularization terms in its objective function, penalizing model complexity.<br><strong>Train-test split:</strong> Using a dedicated 20% holdout set that the model never sees during training provides an honest overfitting check.<br><strong>Decision Tree:</strong> No explicit depth limiting is mentioned — this may explain its lowest performance (54%), as an unlimited DT can grow to perfectly fit training data while generalizing poorly.<br><br>Explicit learning curves comparing training vs. validation accuracy were not reported in the study, which would have been the most direct overfitting diagnostic.</div>
+              <span class="src-badge"><span>Ch. 3.7</span><span>Ch. 2.6.1</span></span></td>
+              <td><span class="src-badge"><span>Ch. 3.7</span></span></td>
+            </tr>
+
+            <tr class="qa-row" data-tier="2" data-domain="F">
+              <td>F6</td>
+              <td><div class="q-text">What is Cronbach's Alpha and what does a score of 0.85 mean for your survey?</div></td>
+              <td><div class="a-text"><strong>Cronbach's Alpha</strong> is a coefficient of internal consistency — it measures how reliably a set of survey items collectively measure the same underlying construct. Values range from 0 to 1, with widely accepted benchmarks: ≥0.90 = excellent, ≥0.80 = good, ≥0.70 = acceptable, &lt;0.60 = poor.<br><br>The pilot test in Chapter 3.9 (n=30 respondents) yielded <span class="stat">α = 0.85</span>, which falls in the <strong>"good" reliability</strong> category. This means the questionnaire items are consistently measuring the same churn-related constructs — survey responses were not random or contradictory. High internal consistency gives confidence that the instrument captured genuine customer sentiments about service quality, cost sensitivity, and switching intention rather than measurement noise.<br><br>Note that Cronbach's Alpha measures consistency but <em>not validity</em> — a highly consistent survey can still fail to measure the right constructs. Content validity (expert review) was also applied (Chapter 3.9) to address this.</div>
+              <span class="src-badge"><span>Ch. 3.9</span></span></td>
+              <td><span class="src-badge"><span>Ch. 3.9</span></span></td>
+            </tr>
+
+            <tr class="qa-row" data-tier="2" data-domain="F">
+              <td>F7</td>
+              <td><div class="q-text">What hyperparameter tuning did you perform? What values did you use?</div></td>
+              <td><div class="a-text">Chapter 3.7 mentions <strong>grid search</strong> for hyperparameter optimization, but Chapter 4 does not report the specific parameter values ultimately used for any of the four models. This is a documentation gap.<br><br>For context, the key hyperparameters for each model are:<br><strong>SVM:</strong> Kernel type (linear/RBF/polynomial), C (regularization strength — controls margin width), gamma (kernel coefficient for RBF).<br><strong>Random Forest:</strong> <span class="stat">n_estimators</span> (number of trees), <span class="stat">max_depth</span>, <span class="stat">min_samples_split</span>, <span class="stat">class_weight</span>.<br><strong>XGBoost:</strong> <span class="stat">learning_rate</span>, <span class="stat">n_estimators</span>, <span class="stat">max_depth</span>, <span class="stat">subsample</span>, regularization terms (lambda, alpha).<br><strong>Decision Tree:</strong> <span class="stat">max_depth</span>, <span class="stat">criterion</span> (gini/entropy), <span class="stat">min_samples_leaf</span>.<br><br>If pressed by the panel, you can reference your actual Python code for the values used, or acknowledge this as a transparency limitation in the written report.</div>
+              <span class="src-badge"><span>Ch. 3.7</span></span></td>
+              <td><span class="src-badge"><span>Ch. 3.7</span></span></td>
+            </tr>
+
+            <tr class="qa-row" data-tier="2" data-domain="F">
+              <td>F8</td>
+              <td><div class="q-text">Why did the Decision Tree have only 54% accuracy — barely above random chance?</div></td>
+              <td><div class="a-text">The Decision Tree's weak performance (54% accuracy) can be attributed to several causes:<br><br><strong>1. Overfitting:</strong> Without depth constraints, a single DT can memorize the training data perfectly but fail to generalize. Its test performance nearly matching chance (50%) suggests poor generalization.<br><br><strong>2. Class imbalance sensitivity:</strong> Unlike RF which averages across many trees, a single DT's split decisions can be dominated by the majority class (non-churners), misclassifying many churners.<br><br><strong>3. High variance:</strong> Decision Trees are high-variance learners — small changes in training data produce very different trees. With a dataset of ~1,100 training records, this variance is not sufficiently suppressed.<br><br>Interestingly, DT had the most <em>balanced</em> class-level performance of all models (both classes had ~0.55 precision and ~0.54 recall), suggesting it was the only model making genuine predictions on both classes — albeit with low accuracy. This makes DT arguably more honest as a baseline than SVM despite the lower overall score.</div>
+              <span class="src-badge"><span>Table 4.3.1</span><span>Ch. 2.7</span></span></td>
+              <td><span class="src-badge"><span>Table 4.3.1</span></span></td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- DOMAIN G -->
+    <div class="domain-block">
+      <div class="domain-header t2" onclick="toggleDomain(this)">
+        <span class="domain-letter t2">G</span>
+        <span class="domain-title">Literature &amp; Theoretical Grounding</span>
+        <span class="domain-count">5 questions</span>
+        <span class="domain-chevron">▼</span>
+      </div>
+      <div class="qa-table-wrap" style="max-height:9000px">
+        <table class="qa-table">
+          <thead><tr><th>#</th><th>Question</th><th>Model Answer</th><th>Source</th></tr></thead>
+          <tbody>
+
+            <tr class="qa-row" data-tier="2" data-domain="G">
+              <td>G1</td>
+              <td><div class="q-text">Your case studies are all from global companies (Vodafone, AT&T, T-Mobile, O2) — none Nigerian. How do you justify applying their insights to Nigeria?</div></td>
+              <td><div class="a-text">The case studies from Chapter 2.12 serve as <strong>methodological benchmarks</strong>, not contextual templates. The ML algorithms (Decision Tree, Random Forest, SVM, gradient boosting) are mathematically domain-agnostic — they function identically whether the input data comes from Vodafone UK or MTN Nigeria. What differs between markets are the feature distributions, churn rates, and the specific drivers of dissatisfaction.<br><br>This distinction is precisely the contribution of this study: the global literature establishes that ML works for churn prediction; this study empirically tests <em>which</em> models work best under Nigerian conditions, with Nigerian subscriber data, Nigerian pricing structures, and Nigeria-specific service quality challenges. The international case studies (Vodafone: −10% churn, AT&T: −12%, T-Mobile: −15%) set performance benchmarks this study's models aspire toward, rather than findings being directly transferred.</div>
+              <span class="src-badge"><span>Ch. 2.12</span></span></td>
+              <td><span class="src-badge"><span>Ch. 2.12</span></span></td>
+            </tr>
+
+            <tr class="qa-row" data-tier="2" data-domain="G">
+              <td>G2</td>
+              <td><div class="q-text">What gaps in existing literature does this study specifically fill?</div></td>
+              <td><div class="a-text">Table 2.14 identifies four explicit literature gaps this study addresses:<br><br><strong>1. Nigerian-context multi-model comparison:</strong> Prior Nigerian studies used basic ML or single models; this study evaluates four models simultaneously (DT, RF, XGBoost, SVM) in a Nigerian telecom context.<br><br><strong>2. Multi-operator scope:</strong> Most prior work focused on a single operator or single geographic region; this study spans two operators (MTN and Airtel) across urban and rural Nigeria.<br><br><strong>3. Underexplored socioeconomic factors:</strong> Behavioral and demographic variables (occupation, education level, spending range) were incorporated as predictors, going beyond call duration and billing data alone.<br><br><strong>4. Comprehensive multi-metric evaluation:</strong> Most surveyed studies reported only accuracy; this study evaluates all four standard metrics (accuracy, precision, recall, F1-score) plus per-class confusion matrices, providing a richer performance picture.</div>
+              <span class="src-badge"><span>Table 2.14</span></span></td>
+              <td><span class="src-badge"><span>Table 2.14</span></span></td>
+            </tr>
+
+            <tr class="qa-row" data-tier="2" data-domain="G">
+              <td>G3</td>
+              <td><div class="q-text">What theoretical frameworks underpin your study design?</div></td>
+              <td><div class="a-text">Chapter 2.13 establishes three theoretical pillars:<br><br><strong>1. Customer Behavior Theories:</strong> The <em>Expectancy Disconfirmation Theory</em> (Oliver, 2019) explains churn as a consequence of actual service falling below customer expectations. The <em>Switching Costs Theory</em> (Burnham et al., 2003) explains why prepaid customers churn more than postpaid — they face minimal financial, psychological, or contractual switching barriers.<br><br><strong>2. Machine Learning Theories:</strong> Supervised learning theory (Bishop, 2006) provides the foundation for training labeled churn/no-churn datasets, while feature selection theory (Guyon & Elisseeff, 2003) guided the chi-square and correlation-based feature reduction approach.<br><br><strong>3. Information Systems Theory:</strong> The <em>Technology Acceptance Model</em> (TAM, Davis, 1989) informs how telecom companies would adopt and use the churn prediction system, while <em>Information Quality Theory</em> (Wang & Strong, 1996) justifies the emphasis on data accuracy, completeness, and timeliness in preprocessing.</div>
+              <span class="src-badge"><span>Ch. 2.13</span></span></td>
+              <td><span class="src-badge"><span>Ch. 2.13</span></span></td>
+            </tr>
+
+            <tr class="qa-row" data-tier="2" data-domain="G">
+              <td>G4</td>
+              <td><div class="q-text">Why didn't you include logistic regression as a baseline comparison model?</div></td>
+              <td><div class="a-text">Logistic regression was deliberately excluded from the model implementation scope (Chapter 3.6) based on its documented limitations reviewed in Chapter 2.5: it assumes a linear relationship between predictor variables and the log-odds of churn; it is sensitive to multicollinearity; it struggles to capture complex non-linear interactions; and it cannot automatically engineer interaction features.<br><br>The correlation heatmap (Figure 4.2.13) confirmed that no strong linear relationships exist among numerical predictors — empirically supporting the decision to use non-linear models instead.<br><br>However, from a methodological rigor standpoint, including logistic regression as a <em>baseline</em> would have strengthened the study by explicitly demonstrating that the ML models outperform the simpler statistical alternative. Its absence is a limitation — future work should include it as a benchmark to quantify the performance gain from ML complexity.</div>
+              <span class="src-badge"><span>Ch. 2.5</span><span>Ch. 3.6</span></span></td>
+              <td><span class="src-badge"><span>Ch. 2.5</span></span></td>
+            </tr>
+
+            <tr class="qa-row" data-tier="2" data-domain="G">
+              <td>G5</td>
+              <td><div class="q-text">How do the Switching Costs Theory and your dataset findings align?</div></td>
+              <td><div class="a-text">The <strong>Switching Costs Theory</strong> (Burnham et al., 2003 — Chapter 2.13) posits that higher perceived switching costs (financial, time, psychological) reduce the likelihood of churn, even when customers are dissatisfied.<br><br>This is strongly validated by the dataset: <span class="stat">79.5%</span> of respondents are prepaid subscribers (Table 4.1.2), operating in an effectively zero-switching-cost environment where changing networks requires nothing more than purchasing a new SIM card for as little as ₦50. Correspondingly, Figure 4.2.15 shows prepaid customers churn at a higher rate than postpaid customers.<br><br>Postpaid subscribers — only <span class="stat">20.5%</span> of the sample but typically corporate clients or higher-income users — face device financing agreements, corporate account complexity, and number porting friction, all of which function as switching cost barriers. Their lower churn rate directly supports the theory's predictions. This alignment between theory and empirical findings strengthens the study's theoretical grounding.</div>
+              <span class="src-badge"><span>Ch. 2.13</span><span>Table 4.1.2</span><span>Fig. 4.2.15</span></span></td>
+              <td><span class="src-badge"><span>Ch. 2.13</span></span></td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div><!-- end tier 2 -->
+
+
+  <!-- ════════════════════════════════════════
+       TIER 3 — WOULD ASK
+  ════════════════════════════════════════ -->
+  <div class="tier-section" data-tier="3">
+    <div class="tier-header">
+      <span class="tier-label t3">Tier 3 — Would Ask</span>
+      <span class="tier-desc">Probing weaknesses, gaps, unexpected findings, ethics. High-stakes. Prepare with full honesty.</span>
+      <span class="tier-meta">~10% of defense time</span>
+    </div>
+
+    <!-- DOMAIN H -->
+    <div class="domain-block">
+      <div class="domain-header t3" onclick="toggleDomain(this)">
+        <span class="domain-letter t3">H</span>
+        <span class="domain-title">Critical Weaknesses, Gaps &amp; Ethics</span>
+        <span class="domain-count">10 questions</span>
+        <span class="domain-chevron">▼</span>
+      </div>
+      <div class="qa-table-wrap" style="max-height:9000px">
+        <table class="qa-table">
+          <thead><tr><th>#</th><th>Question</th><th>Model Answer</th><th>Source</th></tr></thead>
+          <tbody>
+
+            <tr class="qa-row" data-tier="3" data-domain="H">
+              <td>H1</td>
+              <td><div class="q-text">SVM's precision for actual churners (Class 1) is 0.00 in your Table 4.3.4. It never correctly identified a single churner. How can you still recommend it as the best model?</div><span class="q-flag danger">Danger</span></td>
+              <td><div class="a-text">This is an accurate and critical observation. Table 4.3.4 explicitly shows: Class 1 precision = 0.00, recall = 0.00, F1 = 0.00 for SVM. This means the SVM model predicted "no churn" for essentially every record in the test set. Its 65% overall accuracy is entirely a function of the class imbalance — since 65% of test records are genuinely non-churners, always predicting "no churn" achieves 65% accuracy trivially.<br><br>The honest conclusion is that <strong>SVM as trained here is not a useful churn prediction model</strong>. Recommending it based on overall accuracy alone was an error in analysis. A more rigorous comparison using per-class metrics, F1 macro average, or ROC-AUC would show XGBoost or Random Forest as the superior models since they at least achieve some correct churn-class predictions.<br><br>This will be addressed in future work by: (1) applying class-weight balancing; (2) using macro-averaged F1 as the primary metric; and (3) including ROC-AUC.
+              <span class="warn">Approach: Be direct and honest. Acknowledging this gap with composure demonstrates deeper analytical maturity than defending the original conclusion.</span></div>
+              <span class="src-badge"><span>Table 4.3.4</span><span>Ch. 2.11</span></span></td>
+              <td><span class="src-badge"><span>Table 4.3.4</span></span></td>
+            </tr>
+
+            <tr class="qa-row" data-tier="3" data-domain="H">
+              <td>H2</td>
+              <td><div class="q-text">Chapter 3 says data was from telecom company databases; Chapter 4 says it was collected via Google Forms. Which is it?</div><span class="q-flag danger">Danger</span></td>
+              <td><div class="a-text">This is an internal consistency issue that deserves a transparent answer. The data collection framework described in Chapter 3.3 envisioned sourcing data from <strong>telecom operator databases</strong> (MTN/Airtel customer portals) and the UCI ML Repository as the primary and supplementary sources respectively. This was the <em>intended</em> data architecture.<br><br>In practice, the actual data collected and analyzed in Chapter 4 was obtained through <strong>Google Forms surveys</strong> administered to 2,576 subscribers — i.e., self-reported behavioral and demographic data, not extracted billing or CDR records from operator systems. The UCI dataset may have served as supplementary training data but is not independently analyzed in Chapter 4.<br><br>This distinction matters: survey proxies (e.g., "how much do you spend monthly?") carry response bias risk that actual billing records do not. It is a limitation that should be clearly acknowledged and that future work should address by pursuing actual data partnerships with operators under NDAs and NDPR-compliant frameworks.</div>
+              <span class="src-badge"><span>Ch. 3.3</span><span>Ch. 4.1</span></span></td>
+              <td><span class="src-badge"><span>Ch. 3 vs Ch. 4</span></span></td>
+            </tr>
+
+            <tr class="qa-row" data-tier="3" data-domain="H">
+              <td>H3</td>
+              <td><div class="q-text">Objective 2 was to design a database to store telecom data. Where is this database in your deliverables?</div><span class="q-flag danger">Danger</span></td>
+              <td><div class="a-text">Chapter 1.3 states Objective 2 as designing a database to store relevant customer and telecom data. However, reviewing the full project, no explicit <strong>database schema</strong>, entity-relationship diagram, or documented DBMS (e.g., PostgreSQL, MySQL, SQLite) implementation appears in any chapter.<br><br>What was implemented in practice was in-memory data handling via pandas DataFrames — effective for research but not equivalent to a persistent, queryable database system. The preprocessing pipeline described in Chapter 3.4 and the feature table (Table 4.2) represent the <em>data structure design</em> without the accompanying database layer.<br><br>This is an unmet objective that should be acknowledged directly. The practical implementation path would involve: designing a relational schema (Customer, Subscription, Usage, Complaints, Churn tables), implementing it in SQLite or PostgreSQL, and exposing it via SQLAlchemy in Python. This constitutes a clear recommendation for future work.</div>
+              <span class="src-badge"><span>Ch. 1.3</span><span>Ch. 3.3</span></span></td>
+              <td><span class="src-badge"><span>Ch. 1.3</span></span></td>
+            </tr>
+
+            <tr class="qa-row" data-tier="3" data-domain="H">
+              <td>H4</td>
+              <td><div class="q-text">Is a dataset of 1,383 records sufficient to train and reliably evaluate four ML models?</div></td>
+              <td><div class="a-text">This is a legitimate statistical concern. With an 80:20 split, the training set contains approximately <span class="stat">1,106 records</span> and the test set approximately <span class="stat">277 records</span>. For shallow models like Decision Tree and SVM, this is borderline adequate. For ensemble models like Random Forest (which trains hundreds of trees) and XGBoost (sequential boosting), more data generally yields more stable and accurate models.<br><br>The relatively low accuracy ceiling across all four models (54–65%) is itself consistent with an underpowered dataset — real-world telecom churn models trained on millions of CDR records routinely achieve 80–90% accuracy. The dataset's modest size also makes the evaluation less statistically robust: performance on 277 test records has higher variance than on 27,700 records. A 95% confidence interval on 65% accuracy with n=277 would be approximately ±5.6%, meaning the "best" model's true performance range overlaps significantly with the others.<br><br>Future work with actual operator data (millions of records) would produce substantially more reliable and deployable models.</div>
+              <span class="src-badge"><span>Ch. 4.2</span><span>Ch. 1.8</span></span></td>
+              <td><span class="src-badge"><span>Ch. 1.8</span></span></td>
+            </tr>
+
+            <tr class="qa-row" data-tier="3" data-domain="H">
+              <td>H5</td>
+              <td><div class="q-text">Cost was cited by 75% of respondents as the top churn driver, yet your models barely exceed 65% accuracy. Why didn't this strong signal improve performance more?</div></td>
+              <td><div class="a-text">This reveals an important distinction between <strong>attitudinal survey data</strong> and <strong>behavioral feature data</strong>. The survey captures what customers <em>say</em> motivates their switching intention — 75% cite cost. However, the model feature for cost is <span class="stat">Monthly Spending in NGN</span>, which captures <em>absolute spending</em>, not <em>relative cost sensitivity</em>.<br><br>A customer spending ₦8,000/month might feel it's too expensive if a competitor offers equivalent data for ₦5,000 — but another customer spending the same ₦8,000 might feel it's excellent value. The missing variable is <em>competitor price awareness</em> or <em>perceived value-for-money</em> — both attitudinal constructs that cannot be captured through a spending amount alone.<br><br>Additionally, churn is a <em>behavioral outcome</em> that results from the cumulative interaction of many factors simultaneously — no single feature, however strongly cited, maps cleanly to a binary decision. This gap between stated attitudes and observed behavior is a fundamental challenge in survey-based churn research.</div>
+              <span class="src-badge"><span>Table 4.1.9</span><span>Ch. 4.3</span></span></td>
+              <td><span class="src-badge"><span>Table 4.1.9</span></span></td>
+            </tr>
+
+            <tr class="qa-row" data-tier="3" data-domain="H">
+              <td>H6</td>
+              <td><div class="q-text">Did you consider response bias in your survey? How do you know respondents answered honestly?</div></td>
+              <td><div class="a-text">Chapter 3.9 validates <strong>reliability</strong> (Cronbach's α = 0.85) and content validity (expert panel review), but does not explicitly address <strong>social desirability bias</strong> or <strong>acquiescence bias</strong> — two common survey response biases.<br><br><em>Social desirability bias:</em> Respondents may have underreported complaints or overrated satisfaction to appear more positive. <em>Acquiescence bias:</em> Some respondents may have agreed with statements regardless of their actual views.<br><br>Additionally, the 17.3% of respondents who were "neutral" on switching likelihood (Table 4.1.8) represent genuine uncertainty — their responses may not reliably predict actual future churn behavior. Self-reported <em>intentions</em> are imperfect proxies for actual behavioral outcomes, which is why actual CDR-based churn labels (derived from subscription cancellation records) would provide ground truth that surveys cannot.<br><br>These are genuine limitations of primary survey research in behavioral prediction contexts.</div>
+              <span class="src-badge"><span>Ch. 3.9</span><span>Table 4.1.8</span></span></td>
+              <td><span class="src-badge"><span>Ch. 3.9</span></span></td>
+            </tr>
+
+            <tr class="qa-row" data-tier="3" data-domain="H">
+              <td>H7</td>
+              <td><div class="q-text">Your scope excludes competitor strategies and inflation — yet 60.8% of your survey cites competitor offers as a churn driver. Isn't this a fatal inconsistency?</div><span class="q-flag danger">Danger</span></td>
+              <td><div class="a-text">This is a genuine and well-observed tension. Chapter 1.8 acknowledges that external factors such as competitor strategies were excluded from the scope, yet Table 4.1.10 shows <span class="stat">60.8%</span> of respondents cite "better offers from competitors" as a primary switching reason — making it the third most significant driver after high costs (73.7%) and poor service quality (69.3%).<br><br>The honest reconciliation: the survey captures customer <em>perception</em> of competitor superiority as an attitude variable, but the ML model features do not include any operationalized measure of competitive landscape (e.g., competitor price index, network coverage comparison scores, recent market offers). This means the model lacks a critical predictor that customers themselves identify as decisive.<br><br>This is an inherent limitation of survey-based research relying on self-reported data without market intelligence integration. Future work should incorporate structured competitor benchmarking data or time-series market offer data to close this gap.</div>
+              <span class="src-badge"><span>Ch. 1.8</span><span>Table 4.1.10</span></span></td>
+              <td><span class="src-badge"><span>Ch. 1.8</span></span></td>
+            </tr>
+
+            <tr class="qa-row" data-tier="3" data-domain="H">
+              <td>H8</td>
+              <td><div class="q-text">What would you do differently if you were to redo this research from scratch?</div></td>
+              <td><div class="a-text">A comprehensive redesign would prioritize the following improvements:<br><br><strong>1. Data source:</strong> Pursue actual CDR (Call Detail Records) and billing data directly from MTN/Airtel under NDA and NDPR compliance — eliminating survey proxy limitations and dramatically increasing dataset size (millions of records).<br><br><strong>2. Class imbalance:</strong> Apply SMOTE or <span class="stat">class_weight='balanced'</span> before training to ensure models learn churn patterns meaningfully, not just majority-class patterns.<br><br><strong>3. Evaluation:</strong> Use ROC-AUC and Matthews Correlation Coefficient (MCC) as primary metrics; report k-fold CV results (k=10) rather than a single holdout split.<br><br><strong>4. Baselines:</strong> Include logistic regression and a naïve majority-class predictor as explicit baselines to quantify ML value-add.<br><br><strong>5. Database implementation:</strong> Build the actual relational database system (PostgreSQL + SQLAlchemy) to fully deliver Objective 2.<br><br><strong>6. Feature engineering:</strong> Add competitor awareness scores, number-porting history, and customer lifetime value as features.<br><br><strong>7. Scope:</strong> Include all four major Nigerian operators for generalizability.</div>
+              <span class="src-badge"><span>Ch. 1.8</span><span>Ch. 5.3</span></span></td>
+              <td><span class="src-badge"><span>Ch. 5</span></span></td>
+            </tr>
+
+            <tr class="qa-row" data-tier="3" data-domain="H">
+              <td>H9</td>
+              <td><div class="q-text">What are the ethical implications of deploying a churn prediction model that labels customers as high-risk? Could this lead to discriminatory practices?</div></td>
+              <td><div class="a-text">This is a genuinely important concern. Several ethical risks exist in production deployment:<br><br><strong>Discriminatory profiling:</strong> If the model associates demographic features (age, occupation, education) with high churn risk, it could lead to differential treatment — e.g., withholding premium offers from low-income customers flagged as likely churners while offering them to higher-income customers. This could constitute algorithmic discrimination.<br><br><strong>Manipulative retention practices:</strong> Targeting only at-risk customers with attractive offers while loyal customers receive no benefit creates perceived unfairness and may incentivize loyal customers to self-identify as churners to access better deals.<br><br><strong>Privacy and consent:</strong> Customers must be informed that their behavioral data is being used for predictive modeling — a requirement under both GDPR and NDPR.<br><br><strong>Fairness audits:</strong> Any deployed model should be regularly tested for disparate impact across demographic groups.<br><br>Chapter 2.11 touches on privacy and data protection but does not engage with algorithmic fairness — a gap that future work and any deployment plan must address.</div>
+              <span class="src-badge"><span>Ch. 2.11</span><span>Ch. 3.3</span></span></td>
+              <td><span class="src-badge"><span>Ch. 2.11</span></span></td>
+            </tr>
+
+            <tr class="qa-row" data-tier="3" data-domain="H">
+              <td>H10</td>
+              <td><div class="q-text">If a telecom company deployed your SVM model today and acted on its churn predictions, what would realistically happen?</div><span class="q-flag danger">Danger</span></td>
+              <td><div class="a-text">Given Table 4.3.4's Class 1 results (recall = 0.00 for churners), the SVM model would effectively <strong>predict "no churn" for every customer</strong> it evaluated. In practical terms: the company's retention team would receive zero alerts about at-risk customers — resulting in zero proactive interventions. All 480 actual churners in the test population would be missed without exception.<br><br>The model would appear to "work" on paper (65% overall accuracy) while doing absolutely nothing to prevent a single customer from leaving. This is precisely the danger of reporting only aggregate accuracy on imbalanced datasets without per-class analysis.<br><br>The correct deployment path would require: (1) retraining with class balancing; (2) switching to a threshold-adjusted version that sacrifices some accuracy for meaningful churn-class recall; or (3) deploying XGBoost (which did achieve some Class 1 predictions) as the interim solution while the SVM is improved. This scenario illustrates why rigorous per-class evaluation is not optional — it is the difference between a useful and a useless production system.<span class="warn">Be direct here. Demonstrating you understand the real-world consequence of this technical flaw will be your strongest moment of the defense.</span></div>
+              <span class="src-badge"><span>Table 4.3.4</span><span>Ch. 5.4</span></span></td>
+              <td><span class="src-badge"><span>Table 4.3.4</span></span></td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div><!-- end tier 3 -->
+
+</div><!-- end main -->
+
+<script>
+  function toggleDomain(header) {
+    const wrap = header.nextElementSibling;
+    const collapsed = header.classList.toggle('collapsed');
+    if (collapsed) {
+      wrap.style.maxHeight = wrap.scrollHeight + 'px';
+      requestAnimationFrame(() => { wrap.style.maxHeight = '0'; wrap.classList.add('collapsed'); });
+    } else {
+      wrap.classList.remove('collapsed');
+      wrap.style.maxHeight = '9000px';
+    }
+  }
+
+  function filterTier(tier, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const search = document.getElementById('searchBox').value.toLowerCase();
+    applyFilters(tier, search);
+  }
+
+  function searchQA(val) {
+    const activeTier = document.querySelector('.filter-btn.active').dataset.tier;
+    applyFilters(activeTier, val.toLowerCase());
+  }
+
+  function applyFilters(tier, search) {
+    let visible = 0;
+    document.querySelectorAll('.qa-row').forEach(row => {
+      const matchTier = tier === 'all' || row.dataset.tier === tier;
+      const text = row.textContent.toLowerCase();
+      const matchSearch = !search || text.includes(search);
+      if (matchTier && matchSearch) { row.classList.remove('hidden'); visible++; }
+      else { row.classList.add('hidden'); }
+    });
+
+    document.querySelectorAll('.tier-section').forEach(sec => {
+      const t = sec.dataset.tier;
+      const show = tier === 'all' || tier === t;
+      sec.style.display = show ? '' : 'none';
+    });
+
+    document.getElementById('qcount').textContent = visible + ' question' + (visible !== 1 ? 's' : '');
+    document.getElementById('noResults').classList.toggle('visible', visible === 0);
+  }
+
+  document.getElementById('qcount').textContent =
+    document.querySelectorAll('.qa-row').length + ' questions';
+</script>
+</body>
+</html>
