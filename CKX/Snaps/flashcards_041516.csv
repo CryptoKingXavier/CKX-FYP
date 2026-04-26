@@ -1,0 +1,89 @@
+What is the general definition of customer churn in the telecommunications industry?,"The phenomenon where customers discontinue their services with a provider, either by canceling contracts or not renewing plans."
+How does voluntary churn differ from involuntary churn?,"Voluntary churn is customer-initiated due to dissatisfaction or better offers, while involuntary churn is provider-initiated due to non-payment or fraud."
+"According to the source material, the cost of acquiring a new customer is _____ times higher than retaining an existing one.",Five to ten
+Name the four major telecommunications players in the Nigerian market mentioned in the study.,"MTN Nigeria, Airtel Nigeria, Globacom, and 9mobile."
+What was the total number of active mobile subscriptions in Nigeria by the year 2023?,Over 200 million.
+How does customer churn affect a company's operational efficiency?,It forces companies to constantly adapt strategies and divert resources to address churn reasons instead of strategic initiatives.
+"In the context of Nigerian telecommunications, what specific service by MTN has significantly enhanced financial inclusion?",MoMo (Mobile Money).
+Which factor is identified as the highest influence on a customer's likelihood to switch providers in this study?,Cost (at 75% influence).
+Identify the primary reason cited by 69.3% of respondents for considering switching providers.,Poor service quality.
+What is the primary objective of using 'Predictive Analytics' in churn management?,To use historical data and statistical modeling to forecast future customer behavior and identify at-risk users.
+Which machine learning model achieved the highest accuracy and recall (0.65) in the study's results?,Support Vector Machine (SVM).
+Explain the concept of 'Personalized Services' as a retention strategy.,Using data analytics to offer tailored recommendations and plans based on specific customer preferences and behavior.
+What specific retention program is used by MTN Nigeria to reward long-term engagement?,"""Y'ello Rewards"" program."
+What is the main limitation of the 'Accuracy' metric in churn prediction with imbalanced datasets?,It can be misleading because the number of non-churning customers often far exceeds the number of churners.
+Formula: Write the equation for 'Precision' in model evaluation.,$Precision = \frac{TP}{TP + FP}$
+Formula: Write the equation for 'Recall' in model evaluation.,$Recall = \frac{TP}{TP + FN}$
+What does the 'F1-Score' represent in the context of machine learning evaluation?,"The harmonic mean of precision and recall, providing a balanced measure for imbalanced datasets."
+How does 'Survival Analysis' differ from 'Logistic Regression' in churn prediction?,"Survival Analysis models the time until a churn event occurs, whereas Logistic Regression predicts the probability of churn at a specific point."
+The assumption that there is a linear relationship between independent variables and the log odds of the outcome is a limitation of which model?,Logistic Regression.
+What is 'Multicollinearity' and why is it a problem for statistical models?,"It occurs when independent variables are highly correlated, making it difficult to determine the individual effect of each predictor."
+Identify the four machine learning models compared in this research study.,"Decision Tree, Random Forest, Support Vector Machine (SVM), and Extreme Gradient Boosting (XGBoost)."
+"In terms of demographics, which age group constituted the largest portion (30.4%) of the study's respondents?",25 - 34 years.
+What percentage of respondents in the study were found to be using 'Prepaid' subscriptions?,79.5%.
+What is the purpose of 'Min-Max Scaling' in data preprocessing?,"To rescale numerical features to a fixed range, typically between 0 and 1, to ensure all features are on a comparable scale."
+Formula: Min-Max Scaling,$x' = \frac{x - x_{min}}{x_{max} - x_{min}}$
+Define 'Feature Engineering' in the machine learning pipeline.,"The process of creating new, informative features from raw data to improve model performance and capture nuanced behavior."
+Which feature selection method evaluates the relevance of features independently of the machine learning model?,"Filter Methods (e.g., Chi-square, correlation)."
+How do 'Wrapper Methods' for feature selection determine the best subset of features?,"By training a model on different subsets and measuring performance (e.g., recursive feature elimination)."
+What is the 'ROC-AUC' metric used to measure?,The overall ability of a model to discriminate between positive (churn) and negative (non-churn) classes across various thresholds.
+"In the study, which segment of customers showed a higher tendency to churn: Prepaid or Postpaid?",Prepaid customers.
+Why is 'Stratified K-Fold Cross-Validation' preferred for churn prediction datasets?,It ensures each fold maintains the same proportion of churners and non-churners as the original imbalanced dataset.
+"According to the 'Expectancy Disconfirmation Theory', when does customer dissatisfaction occur?",When the actual service performance falls short of the customer's initial expectations.
+How does the 'Switching Costs Theory' explain customer retention?,"Perceived financial, time, or psychological costs of moving to a new provider act as a deterrent to churn even when satisfaction is low."
+What is the 'Black Box' problem associated with advanced models like Neural Networks or Ensemble methods?,The decision-making process is highly complex and not easily interpretable by humans compared to simple models like Decision Trees.
+Which statistical test was used in the study to compare the performance metrics between model pairs on the same dataset?,Paired t-test.
+What was the resulting accuracy of the 'Decision Tree' (DT) model in this study?,0.54 (or 54%).
+Identify the primary data sources used for the study's dataset.,MTN and Airtel subscriber databases supplemented by the UCI Machine Learning Repository.
+What role does 'Network Coverage' play in customer churn according to the study's analysis?,"It is a major driver of churn, as customers expect reliable call and data connections across all geographical areas."
+"In the 'Correlation Heatmap' analysis, what was the relationship between 'Age' and 'Monthly Spending'?","Very little to no correlation, indicating age does not significantly influence spending behavior."
+What is the definition of 'Recall' in the specific context of churn prediction?,The model's ability to correctly identify the actual proportion of customers who really churned.
+"According to Chapter 5, what is the most critical determinant of customer loyalty in the Nigerian telecom industry?",Service Quality.
+What recommendation did the study make regarding the Support Vector Machine (SVM) model?,Telecommunication companies should integrate it into their management systems to identify at-risk customers early.
+Identify one challenge of 'Data Integration' from multiple sources mentioned in Chapter 2.,"It is complex and can introduce errors or inconsistencies if discrepancies between different systems (e.g., billing vs. call records) aren't managed."
+What is the 'Hazard Function' in survival analysis?,"It estimates the instantaneous rate at which customers are expected to churn at a specific time, given they have not churned yet."
+"Which machine learning approach builds a series of trees sequentially, where each tree corrects the errors of the previous one?","Gradient Boosting Machines (e.g., XGBoost)."
+Explain the 'Theory of Planned Behavior' in the context of customer retention.,"Retention is influenced by a customer's attitudes toward the service, subjective norms, and perceived behavioral control."
+What was the sample size of the refined data used for the implementation phase in Chapter 4?,"1,383 respondents."
+Which specific software library in Python was mentioned as a tool for implementing the machine learning models?,Scikit-learn.
+"In the 'Customer Experience' analysis, what percentage of respondents had filed 0 complaints in the last 6 months?",43.4%.
+What does the term 'Censored Data' mean in the context of Survival Analysis?,Data for customers who have not yet experienced the 'churn' event by the end of the observation period.
+Why is 'Chi-Square Test' used in the feature selection process of this study?,To evaluate the independence between categorical features (like Gender or Occupation) and the churn outcome.
+Identify a brand-related impact of frequent customer churn.,"Damage to company reputation through negative word-of-mouth and social media reviews, deterring prospective customers."
+What is the purpose of a 'Feedback Loop' in the proposed churn prediction framework?,To continuously refine machine learning models with new data to improve future prediction accuracy.
+Concept: Random Forest,Definition: An ensemble learning method that combines multiple decision trees to produce more robust predictions and reduce overfitting.
+What is 'Proactive Customer Support' as seen in the T-Mobile case study?,Using regular check-ins and feedback loops to resolve issues before they lead to customer dissatisfaction.
+Which demographic category represented the largest occupation group in the survey?,Employed individuals (33.2%).
+What is 'SHAP' used for in modern machine learning?,It is a technique (SHapley Additive exPlanations) used to improve model interpretability by showing feature contributions to predictions.
+"In the study findings, what was the second most common complaint after 'Service Quality'?",Billing Issues (26.0%).
+Define 'Service Reliability' as used in Chapter 2.,"The dependability and continuity of services, characterized by minimal interruptions and consistent performance."
+What was the reported Cronbach’s Alpha coefficient for the survey instrument's reliability?,0.85.
+What does 'Macro Average' represent in a performance evaluation report?,"The arithmetic mean of a metric (like Precision) calculated independently for each class, giving equal weight to all classes."
+"In the context of the study, what was the 'Support' value for the non-churn (0) class in the performance reports?",903
+Which factor regarding billing was found to negatively impact loyalty if not handled transparently?,Hidden charges and inaccurate billing records.
+What is the primary benefit of 'Bundling' as used by Reliance Jio?,"It increases 'customer stickiness' by combining multiple services like mobile, internet, and digital content (TV/Cinema) into one plan."
+Define 'Customer Tenure' and its relation to churn.,The duration of time a customer has been with a provider; long-term customers generally show higher loyalty.
+What was the most common 'Average Monthly Spending' range for respondents in the study?,"?1,000 - ?5,000."
+Identify the primary 'Communication Method' preferred by 46.3% of the study's respondents.,Voice Calls.
+What is the goal of the 'Nigerian National Broadband Plan' mentioned in Chapter 1?,To increase broadband penetration and enhance the quality of network infrastructure nationwide.
+"According to the literature review, why might 'Younger Demographics' have different churn drivers than older ones?",They tend to prioritize high-speed mobile data for social media and streaming over traditional call reliability.
+Which machine learning model used in the study is described as finding the 'optimal hyperplane'?,Support Vector Machine (SVM).
+"In the results, what was the precision of the SVM model for predicting the minority 'churn' class?",0.00 (indicating it failed to correctly identify specific positive instances despite high overall accuracy).
+What is the 'Holdout Method' in model validation?,Splitting the dataset into a fixed training set to build the model and a test set to evaluate it.
+Define 'LIME' in the context of model interpretability.,Local Interpretable Model-agnostic Explanations; a technique to explain individual predictions of any machine learning model.
+How does 'Feature Adoption' indicate customer engagement?,Customers who frequently try new services or upgrade plans are generally more engaged and less likely to leave.
+What was the 'Total' frequency of respondents after data cleaning in Chapter 4?,"1,383.00"
+Name one 'Operational Definition' provided for 'Telecommunication Industry'.,"The industry dealing with information communication through technology equipment like telephones, internet, and WLAN."
+What does 'Network Coverage' denote in the operational definitions?,"The geographical region where a user can access voice, message, or web services."
+"According to the study, how do 'Incentives' like loyalty rewards help reduce churn?",By making customers feel appreciated and encouraging long-term patronage through prizes and discounts.
+What is the main advantage of the 'Cox Proportional Hazards' model in survival analysis?,It is flexible because it does not assume a specific distribution for survival times.
+Identify a challenge related to 'Timeliness of Data' in churn prediction.,"Outdated data may not reflect current customer behavior, leading to incorrect predictions if usage patterns have shifted recently."
+What is the 'Significance of Study' for telecommunications firms regarding 'Resource Deployment'?,"Predictive models facilitate rational resource allocation by targeting retention efforts only toward high-risk, high-value customers."
+Explain 'Embedded Methods' for feature selection.,"Methods that perform feature selection during model training, often using regularization terms like Lasso or tree-based importance scores."
+"In the 'Case Study' of Vodafone, by how much was the churn rate reduced using machine learning?",Approximately 10%.
+What was the primary research question regarding machine learning models in this study?,Which machine learning models are most effective in predicting customer churn?
+The 'Descriptive' aspect of the research design aims to do what?,Quantify the extent of customer churn by analyzing historical data.
+What data splitting ratio was used for training and testing the models?,80:20 (8:2).
+What is 'Principal Component Analysis' (PCA) used for in unsupervised learning?,Dimensionality reduction; reducing the number of features while preserving the essential structure of the data.
+Which factor in Chapter 4's multi-response table had a 73.7% frequency as a reason for switching?,High Costs.
+What recommendation was made regarding 'Customer Feedback Loops'?,Establishing quick issue-resolution platforms and regular surveys to identify deficiencies before they cause churn.
